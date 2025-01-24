@@ -2,53 +2,53 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Define the parameters
-lambda_values = [5, 10, 15]  # Different arrival rates
-mu = 12  # Service rate
-queue_populations = np.arange(1, 51)  # Range of queue populations
+arrival_rates = np.linspace(0.1, 0.9, 50)  # Lambda (arrival rate)
+service_rate = 1.0  # Mu (service rate), fixed at 1 customer/unit time
 
-# Function to calculate average queue length and system utilization
-def calculate_queue_metrics(lambda_rate, mu_rate):
-    utilization = lambda_rate / mu_rate
-    avg_queue_length = (lambda_rate**2) / (mu_rate * (mu_rate - lambda_rate))
-    return avg_queue_length, utilization
+# Calculate performance metrics for M/M/1 queue
+utilization = arrival_rates / service_rate  # Utilization factor (rho)
+L = utilization / (1 - utilization)  # Average number in the system
+L_q = utilization**2 / (1 - utilization)  # Average number in the queue
+W = 1 / (service_rate - arrival_rates)  # Average time in the system
+W_q = utilization / (service_rate - arrival_rates)  # Average time in the queue
 
-# Initialize lists to store metrics for different lambda values
-avg_queue_lengths = []
-utilizations = []
+# Plot Utilization vs. Arrival Rate
+plt.figure(figsize=(10, 6))
+plt.plot(arrival_rates, utilization, label="Utilization Factor (ρ)", lw=2)
+plt.axhline(y=1, color='r', linestyle='--', label="Maximum Utilization (ρ=1)")
+plt.title("Utilization Factor vs. Arrival Rate (M/M/1 Queue)", fontsize=14)
+plt.xlabel("Arrival Rate (λ)", fontsize=12)
+plt.ylabel("Utilization Factor (ρ)", fontsize=12)
+plt.legend()
+plt.grid(True)
+plt.show()
 
-# Simulate and calculate for each lambda value
-for lambda_rate in lambda_values:
-    queue_lengths = []
-    utilizations_for_lambda = []
-    
-    for population in queue_populations:
-        avg_queue_length, utilization = calculate_queue_metrics(lambda_rate, mu)
-        queue_lengths.append(avg_queue_length)
-        utilizations_for_lambda.append(utilization)
-    
-    avg_queue_lengths.append(queue_lengths)
-    utilizations.append(utilizations_for_lambda)
-
-# Plotting the results
+# Plot Queue Metrics
 plt.figure(figsize=(12, 6))
 
-# Plot average queue length
-plt.subplot(1, 2, 1)
-for i, lambda_rate in enumerate(lambda_values):
-    plt.plot(queue_populations, avg_queue_lengths[i], label=f"λ = {lambda_rate}")
-plt.title('Average Queue Length vs Queue Population')
-plt.xlabel('Queue Population')
-plt.ylabel('Average Queue Length')
-plt.legend()
+# Average number in system and queue
+plt.plot(arrival_rates, L, label="Average Number in System (L)", lw=2)
+plt.plot(arrival_rates, L_q, label="Average Number in Queue (Lq)", lw=2)
 
-# Plot system utilization
-plt.subplot(1, 2, 2)
-for i, lambda_rate in enumerate(lambda_values):
-    plt.plot(queue_populations, utilizations[i], label=f"λ = {lambda_rate}")
-plt.title('System Utilization vs Queue Population')
-plt.xlabel('Queue Population')
-plt.ylabel('System Utilization')
+# Labels and title
+plt.title("Queue Metrics vs. Arrival Rate (M/M/1 Queue)", fontsize=14)
+plt.xlabel("Arrival Rate (λ)", fontsize=12)
+plt.ylabel("Number of Customers", fontsize=12)
 plt.legend()
+plt.grid(True)
+plt.show()
 
-plt.tight_layout()
+# Plot Time Metrics
+plt.figure(figsize=(12, 6))
+
+# Average time in system and queue
+plt.plot(arrival_rates, W, label="Average Time in System (W)", lw=2)
+plt.plot(arrival_rates, W_q, label="Average Time in Queue (Wq)", lw=2)
+
+# Labels and title
+plt.title("Time Metrics vs. Arrival Rate (M/M/1 Queue)", fontsize=14)
+plt.xlabel("Arrival Rate (λ)", fontsize=12)
+plt.ylabel("Time (Units)", fontsize=12)
+plt.legend()
+plt.grid(True)
 plt.show()
