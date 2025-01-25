@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Queue Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #007acc;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bank Queue Management System</h1>
+    <p>This document explains the implementation of a queue management system for a banking hall using the M/M/1 queue model from queueing theory. The M/M/1 queue assumes:</p>
+    <ul>
+        <li>A single server (e.g., one teller at the bank counter).</li>
+        <li>Poisson-distributed arrival times (exponentially distributed inter-arrival times).</li>
+        <li>Exponential service times.</li>
+        <li>First-Come, First-Served (FCFS) discipline.</li>
+    </ul>
+
+    <h2>Key Parameters and Equations</h2>
+    <p>The following parameters and formulas are used to evaluate the system:</p>
+    <ul>
+        <li>Arrival rate (<span>\( \lambda \)</span>): Average number of customers arriving per unit time.</li>
+        <li>Service rate (<span>\( \mu \)</span>): Average number of customers served per unit time.</li>
+        <li>Utilization factor (<span>\( \rho \)</span>): The fraction of time the server is busy.</li>
+    </ul>
+
+    <p>The performance metrics are:</p>
+    <ul>
+        <li><strong>Utilization Factor:</strong> <span>\( \rho = \frac{\lambda}{\mu} \)</span></li>
+        <li><strong>Average number of customers in the system:</strong> <span>\( L = \frac{\rho}{1 - \rho} \)</span></li>
+        <li><strong>Average number of customers in the queue:</strong> <span>\( L_q = \frac{\rho^2}{1 - \rho} \)</span></li>
+        <li><strong>Average time a customer spends in the system:</strong> <span>\( W = \frac{1}{\mu - \lambda} \)</span></li>
+        <li><strong>Average time a customer spends waiting in the queue:</strong> <span>\( W_q = \frac{\rho}{\mu - \lambda} \)</span></li>
+    </ul>
+
+    <h2>System Design and Improvements</h2>
+    <p>The M/M/1 queue can be used as a baseline model. Based on the system's performance, the following strategies can be implemented to improve the system:</p>
+    <ol>
+        <li><strong>Add More Servers:</strong> Transition to an M/M/c model, where multiple servers are available to handle more customers concurrently.</li>
+        <li><strong>Separate Queues:</strong> Implement specialized queues for different services to optimize customer flow.</li>
+        <li><strong>Introduce Automation:</strong> Use self-service kiosks or online platforms to handle routine banking tasks.</li>
+    </ol>
+
+    <h2>Simulation Results</h2>
+    <p>The following plots were generated to visualize the system's performance:</p>
+    <ol>
+        <li><strong>Utilization Factor vs. Arrival Rate:</strong> This plot shows how the server utilization increases as the arrival rate approaches the service rate. High utilization (> 0.8) indicates potential congestion.</li>
+        <li><strong>Queue Metrics:</strong> Includes the average number of customers in the system (<span>\( L \)</span>) and in the queue (<span>\( L_q \)</span>).</li>
+        <li><strong>Time Metrics:</strong> Includes the average time spent by a customer in the system (<span>\( W \)</span>) and in the queue (<span>\( W_q \)</span>).</li>
+    </ol>
+    <p>See the corresponding plots for more insights into system performance.</p>
+
+    <h2>Conclusion</h2>
+    <p>The M/M/1 queue model provides a simple yet effective way to analyze and optimize queue performance in a banking hall. By understanding and managing the arrival and service rates, bank managers can minimize wait times, reduce congestion, and improve customer satisfaction.</p>
+</body>
+</html>
