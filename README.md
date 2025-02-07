@@ -1,11 +1,10 @@
-To design a system that helps a bank manager handle queues in a banking hall effectively, we can use **queueing theory** principles, particularly the **M/M/1 queue** model. This model assumes:
+A system that helps a bank manager handle queues in a banking hall effectively, we use **queueing theory** principles, particularly the **M/M/1 queue** model. This model assumes:
 
 1. A single server (e.g., one teller at the bank counter).
 2. Exponentially distributed inter-arrival times (Poisson arrival process).
 3. Exponentially distributed service times.
 4. First-come, first-served (FCFS) discipline.
 
-Here's how the system can be designed and evaluated:
 
 ---
 
@@ -35,7 +34,7 @@ Here's how the system can be designed and evaluated:
 ---
 
 ### 3. **Simulation and Visualization**
-We'll simulate the M/M/1 queue for varying arrival and service rates to see its performance under different conditions. Let’s calculate and plot:
+Simulate the M/M/1 queue for varying arrival and service rates to see its performance under different conditions. Calculate and plot:
 
 1. **Utilization Factor (\(\rho\))** vs. \(\lambda\).
 2. Average **queue length** and **waiting time** under different conditions.
